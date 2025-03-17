@@ -1,9 +1,9 @@
 version: '3.8'
 
-# Общие настройки проекта
+# РћР±С‰РёРµ РЅР°СЃС‚СЂРѕР№РєРё РїСЂРѕРµРєС‚Р°
 name: etl-final
 
-# Общие переменные для подключения к PostgreSQL
+# РћР±С‰РёРµ РїРµСЂРµРјРµРЅРЅС‹Рµ РґР»СЏ РїРѕРґРєР»СЋС‡РµРЅРёСЏ Рє PostgreSQL
 x-postgresql-connection-env: &pg-connect
   POSTGRESQL_APP_HOST: ${POSTGRESQL_APP_HOST}
   POSTGRESQL_APP_DB: ${POSTGRESQL_APP_DB}
@@ -13,7 +13,7 @@ x-postgresql-connection-env: &pg-connect
   POSTGRESQL_APP_PASSWORD: ${POSTGRESQL_APP_PASSWORD}
   POSTGRESQL_APP_PORT: ${POSTGRESQL_APP_PORT}
 
-# Общие настройки для сервисов Airflow
+# РћР±С‰РёРµ РЅР°СЃС‚СЂРѕР№РєРё РґР»СЏ СЃРµСЂРІРёСЃРѕРІ Airflow
 x-airflow-common: &x-airflow-common
   build: ./airflow
   env_file:
@@ -25,7 +25,7 @@ x-airflow-common: &x-airflow-common
     - ./airflow/config/airflow.cfg:/opt/airflow/airflow.cfg
 
 services:
-  # Сервис PostgreSQL
+  # РЎРµСЂРІРёСЃ PostgreSQL
   postgres:
     container_name: postgres
     build: ./db/postgres
@@ -44,7 +44,7 @@ services:
     volumes:
       - pg_data:/var/lib/postgresql/data
 
-  # Сервис MongoDB
+  # РЎРµСЂРІРёСЃ MongoDB
   mongo:
     build: ./db/mongo
     container_name: mongo
@@ -64,7 +64,7 @@ services:
     volumes:
       - mongo_data:/data/db
 
-  # Сервис для генерации данных
+  # РЎРµСЂРІРёСЃ РґР»СЏ РіРµРЅРµСЂР°С†РёРё РґР°РЅРЅС‹С…
   data_generator:
     build: ./data_generator
     container_name: mongo_data_generator
@@ -80,7 +80,7 @@ services:
       MONGO_URI: mongodb://${MONGO_INITDB_ROOT_USERNAME}:${MONGO_INITDB_ROOT_PASSWORD}@mongo:${MONGO_PORT}/
     command: ["python", "generate_data.py"]
 
-  # Инициализация Airflow
+  # РРЅРёС†РёР°Р»РёР·Р°С†РёСЏ Airflow
   airflow-init:
     build: ./airflow
     container_name: airflow_init
@@ -120,7 +120,7 @@ services:
             --conn-password '${POSTGRESQL_APP_PASSWORD}' \
             --conn-port '${POSTGRESQL_APP_PORT}'
 
-  # Веб-сервер Airflow
+  # Р’РµР±-СЃРµСЂРІРµСЂ Airflow
   airflow-webserver:
     <<: *x-airflow-common
     container_name: airflow_webserver
@@ -132,7 +132,7 @@ services:
       - "8080:8080"
     entrypoint: ["airflow", "webserver"]
 
-  # Планировщик Airflow
+  # РџР»Р°РЅРёСЂРѕРІС‰РёРє Airflow
   airflow-scheduler:
     <<: *x-airflow-common
     container_name: airflow_scheduler
@@ -142,7 +142,7 @@ services:
         condition: service_completed_successfully
     entrypoint: ["airflow", "scheduler"]
 
-# Тома для хранения данных
+# РўРѕРјР° РґР»СЏ С…СЂР°РЅРµРЅРёСЏ РґР°РЅРЅС‹С…
 volumes:
   pg_data:
   mongo_data:

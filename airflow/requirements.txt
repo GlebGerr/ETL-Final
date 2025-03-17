@@ -1,0 +1,1 @@
+# Основные зависимости Airflowapache-airflow==2.8.0# Провайдеры для работы с MongoDB и PostgreSQLapache-airflow-providers-mongo==4.1.0apache-airflow-providers-postgres==5.10.0# Дополнительные библиотекиrequests==2.31.0beautifulsoup4==4.12.2psycopg2-binary==2.9.9pymongo==4.6.3

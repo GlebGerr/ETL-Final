@@ -1,0 +1,49 @@
+# Игнорируем временные файлы Python
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Игнорируем скомпилированные C расширения
+*.so
+
+# Игнорируем папки сборки и дистрибуции
+build/
+dist/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+
+# Игнорируем логи и настройки
+*.log
+local_settings.py
+db.sqlite3
+db.sqlite3-journal
+
+# Игнорируем виртуальные окружения
+.env
+.venv
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+
+# Игнорируем кэши и отчеты тестирования
+.tox/
+.nox/
+.coverage
+.coverage.*
+.cache
+nosetests.xml
+coverage.xml
+*.cover
+.hypothesis/
+.pytest_cache/
+
+# Игнорируем настройки IDE
+.idea/
+.vscode/
+
+# Игнорируем специфичные для проекта файлы
+test.ipynb
